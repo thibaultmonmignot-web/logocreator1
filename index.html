@@ -2,33 +2,70 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Logo Creator</title>
 
 <style>
 body {
   margin: 0;
-  font-family: Arial;
-  background: black;
+  font-family: Arial, sans-serif;
+  background: #000;
   color: white;
-  text-align: center;
 }
 
-/* TITRE */
-h1 {
-  margin-top: 20px;
-  font-size: 30px;
+/* NAVBAR */
+nav {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 50px;
+  border-bottom: 1px solid #222;
+}
+
+nav h1 {
+  font-size: 18px;
+}
+
+nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+  opacity: 0.7;
+}
+
+nav a:hover {
+  opacity: 1;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.hero h2 {
+  font-size: 60px;
+  margin: 0;
+}
+
+.hero h2 span {
+  color: #00f0ff;
+}
+
+.hero p {
+  opacity: 0.7;
+  max-width: 600px;
+  margin: 20px auto;
 }
 
 /* CARROUSEL */
 .carousel {
   width: 70%;
   height: 400px;
-  margin: auto;
-  margin-top: 30px;
+  margin: 40px auto;
   border-radius: 15px;
   overflow: hidden;
-  border: 2px solid white;
-  box-shadow: 0 0 20px white;
+  border: 1px solid #333;
+  box-shadow: 0 0 30px rgba(255,255,255,0.1);
 }
 
 .carousel img {
@@ -37,31 +74,20 @@ h1 {
   object-fit: cover;
 }
 
-/* BOUTONS */
+/* BUTTONS */
 .buttons {
-  margin-top: 40px;
   display: flex;
   justify-content: center;
   gap: 20px;
-  flex-wrap: wrap;
-}
-
-/* LED ANIMATION */
-@keyframes led {
-  0% { box-shadow: 0 0 5px white; }
-  50% { box-shadow: 0 0 20px white; }
-  100% { box-shadow: 0 0 5px white; }
+  margin-top: 30px;
 }
 
 .btn {
-  padding: 15px 25px;
-  border: 2px solid white;
-  background: black;
+  padding: 12px 20px;
+  border: 1px solid white;
+  background: transparent;
   color: white;
   cursor: pointer;
-  border-radius: 10px;
-  position: relative;
-  animation: led 2s infinite;
   transition: 0.3s;
 }
 
@@ -70,23 +96,49 @@ h1 {
   color: black;
 }
 
-/* PANELS */
+/* SECTIONS */
+.section {
+  padding: 80px 20px;
+  text-align: center;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #111;
+  border: 1px solid #222;
+  padding: 20px;
+  width: 250px;
+  border-radius: 10px;
+}
+
+/* PANEL */
 .panel {
   display: none;
   margin-top: 20px;
 }
-
-input {
-  padding: 10px;
-  width: 250px;
-}
-
 </style>
 </head>
 
 <body>
 
-<h1>LOGO CREATOR</h1>
+<nav>
+  <h1>LOGO CREATOR</h1>
+  <div>
+    <a href="#">Connexion</a>
+    <a href="#">Commencer</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <h2>Crée tes <span>logos</span></h2>
+  <p>Transforme tes idées en designs modernes et professionnels en quelques secondes.</p>
+</div>
 
 <!-- CARROUSEL -->
 <div class="carousel">
@@ -95,38 +147,36 @@ input {
 
 <!-- BOUTONS -->
 <div class="buttons">
-
-  <button class="btn" onclick="showSMS()">Envoyer un message</button>
-
+  <button class="btn" onclick="showSMS()">Envoyer message</button>
   <button class="btn" onclick="showForm()">Formules</button>
-
   <button class="btn" onclick="showPremium()">Premium</button>
-
-</div>
-
-<!-- SMS -->
-<div id="sms" class="panel">
-  <h3>Envoyer un message</h3>
-  <input id="msg" placeholder="Ton message">
-  <button onclick="send()">Envoyer</button>
 </div>
 
 <!-- FORMULES -->
-<div id="form" class="panel">
-  <h3>Formules</h3>
-  <p>20€ = 1 logo</p>
-  <p>100€ = site + logo</p>
+<div class="section panel" id="form">
+  <h2>Formules</h2>
+  <div class="cards">
+    <div class="card">20€ → 1 logo</div>
+    <div class="card">100€ → site + logo</div>
+    <div class="card">200€ → pack pro</div>
+  </div>
 </div>
 
 <!-- PREMIUM -->
-<div id="premium" class="panel">
-  <h3>Premium</h3>
-  <p>120€ = site + logo + accès prioritaire</p>
+<div class="section panel" id="premium">
+  <h2>Premium</h2>
+  <div class="card">120€ → site + logo + priorité + support</div>
+</div>
+
+<!-- MESSAGE -->
+<div class="section panel" id="sms">
+  <h2>Envoyer un message</h2>
+  <input placeholder="ton message">
+  <button class="btn">Envoyer</button>
 </div>
 
 <script>
 
-/* CARROUSEL */
 let images = ["logo1.jpg","logo2.jpg","logo3.jpg"];
 let i = 0;
 
@@ -135,16 +185,10 @@ setInterval(() => {
   document.getElementById("slide").src = images[i];
 }, 5000);
 
-/* PANELS */
 function hideAll(){
-  document.getElementById("sms").style.display="none";
   document.getElementById("form").style.display="none";
   document.getElementById("premium").style.display="none";
-}
-
-function showSMS(){
-  hideAll();
-  document.getElementById("sms").style.display="block";
+  document.getElementById("sms").style.display="none";
 }
 
 function showForm(){
@@ -157,10 +201,9 @@ function showPremium(){
   document.getElementById("premium").style.display="block";
 }
 
-/* SIMULATION MESSAGE */
-function send(){
-  let msg = document.getElementById("msg").value;
-  alert("Message envoyé : " + msg);
+function showSMS(){
+  hideAll();
+  document.getElementById("sms").style.display="block";
 }
 
 </script>
