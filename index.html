@@ -13,56 +13,7 @@ body {
   color: white;
 }
 .carousel {
-let images = [
-  "logo.jpg",
-  "logo.jpg2",
-  "logo3.jpg"
-];
 
-let i = 0;
-
-setInterval(() => {
-  i = (i + 1) % images.length;
-  document.getElementById("slide").src = images[i];
-}, 5000);
-
-/* changer image avec fade */
-function showImage(i) {
-  slide.style.opacity = 0;
-
-  setTimeout(() => {
-    slide.src = images[i];
-    slide.style.opacity = 1;
-  }, 300);
-}
-
-/* suivant */
-function next() {
-  index = (index + 1) % images.length;
-  showImage(index);
-}
-
-/* précédent */
-function prev() {
-  index = (index - 1 + images.length) % images.length;
-  showImage(index);
-}
-
-/* auto slide */
-function startAuto() {
-  interval = setInterval(next, 5000);
-}
-
-startAuto();
-
-/* pause quand souris dessus */
-document.querySelector(".carousel").addEventListener("mouseenter", () => {
-  clearInterval(interval);
-});
-
-document.querySelector(".carousel").addEventListener("mouseleave", () => {
-  startAuto();
-});
 
 /* IMAGE */
 .carousel img {
