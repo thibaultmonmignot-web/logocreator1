@@ -13,7 +13,18 @@ body {
   color: white;
 }
 .carousel {
+let images = [
+  "logo.jpg",
+  "logo.jpg2",
+  "logo3.jpg"
+];
 
+let i = 0;
+
+setInterval(() => {
+  i = (i + 1) % images.length;
+  document.getElementById("slide").src = images[i];
+}, 5000);
 
 /* changer image avec fade */
 function showImage(i) {
